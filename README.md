@@ -12,7 +12,7 @@ Run composer install
 
 ## database setup
 Run cp .env.example .env or copy .env.example .env
-create a db an then set up your credetials.
+create a database and setup it with your credentials in the .env file.
 
 Then Run 'php artisan optimize' command
 
@@ -46,6 +46,8 @@ change API_TOKEN with new user login access token in config/constants.php
 # serve with hot reload at localhost:8080
 npm run dev
 ``` 
-
+## Author
+Protap Singh Jacky
+Email: protapsingh123@gmil.com
 
 
