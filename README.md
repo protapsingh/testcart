@@ -38,6 +38,11 @@ Go to cart-system folder then follow the below steps:
 # install dependencies
 npm install
 
+# set api url
+change your API_URL,  in config/constants.php
+
+change API_TOKEN with new user login access token in config/constants.php
+
 # serve with hot reload at localhost:8080
 npm run dev
 ``` 
