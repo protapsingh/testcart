@@ -30,7 +30,7 @@
       <tfoot>
         <tr>
           <td>
-            <button @click="removeCart()">Checkout</button>
+            <button @click="resetCart()">Checkout</button>
           </td>
           <td colspan="5"><strong>Total:</strong> {{ cartTotal | currency }}</td>
         </tr>
@@ -55,7 +55,7 @@ export default {
   },
   methods: {
     ...mapActions("cart", {
-      removeCart: 'removeCart',
+      resetCart: 'resetCart',
       removeItemFromCart: 'removeItemFromCart',
       incrementQuantityByCartItem: 'incrementQuantityByCartItem',
       decrementQuantityByCartItem: 'decrementQuantityByCartItem',

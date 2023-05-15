@@ -77,4 +77,11 @@ class CartService extends BaseService
         return $this->sendResponse($this->cartRepository->getCartByUserId($input['user_id']), 'Carts retrieved successfully.');
    
     }
+
+    public function resetUserCart() 
+    {
+        
+        return $this->sendResponse($this->cartRepository->resetCart(Auth::user()->id), 'Cart reset successfully.');
+   
+    }
 }

@@ -76,8 +76,13 @@ const actions = {
     );
   },
 
-  removeCart({ state, commit }) {
-    commit('resetCart');
+ async resetCart({ state, commit }) {
+
+    const response = await ApiCallMaker('DELETE', '/reset-user-cart','', '','');
+        if (response && response.data.success==true) { 
+          commit('resetCart');
+        }
+  
   },
 
   async incrementQuantityByCartItem({ state, commit, rootState }, { itemId }) {

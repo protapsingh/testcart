@@ -2,6 +2,7 @@
 
 namespace App\Repositories;
 use App\Models\Cart;
+use App\Models\CartItem;
 
 class CartRepository 
 {
@@ -29,6 +30,13 @@ class CartRepository
     public function getCartByUserId($userId) {
         
         return  Cart::with('cartItems.product')->where('user_id', $userId)->first();
+    }
+
+    public function resetCart($userId) {
+        
+        $cart = Cart::where('user_id', $userId)->first();
+        CartItem::where('cart_id',$cart->id)->delete();
+        return $cart->delete();
     }
 
 }

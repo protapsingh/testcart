@@ -71,12 +71,20 @@ class CartController extends Controller
         return $this->cartService->getUserCart($request);
     }
    
-    /**
+
+    public function resetCart()
+    {
+        return $this->cartService->resetUserCart();
+    }
+
+
+      /**
      * Remove the specified resource from storage.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
     public function destroy(Cart $cart)
     {
         $cart->delete();

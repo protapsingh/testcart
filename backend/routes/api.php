@@ -27,4 +27,5 @@ Route::middleware('auth:api')->group( function () {
     Route::resource('carts', CartController::class);
     Route::resource('cartitems', CartItemController::class);
     Route::get('get-user-cart', [CartController::class, 'getUserCart']);
+    Route::DELETE('reset-user-cart', [CartController::class, 'resetCart']);
 });
