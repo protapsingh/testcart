@@ -6,6 +6,7 @@ namespace App\Services;
 use Illuminate\Support\Facades\Validator;
 use App\Repositories\CartRepository;
 use App\Services\BaseService;
+use Illuminate\Support\Facades\Auth;
 
 class CartService extends BaseService
 {
@@ -72,15 +73,7 @@ class CartService extends BaseService
     {
 
         $input = $request->all();
-     
-        $validator = Validator::make($input, [
-            'user_id' => 'required',
-        ]);
-     
-        if($validator->fails()){
-            return $this->sendError('Validation Error.', $validator->errors());       
-        }
-     
+        $input['user_id'] =Auth::user()->id;
         return $this->sendResponse($this->cartRepository->getCartByUserId($input['user_id']), 'Carts retrieved successfully.');
    
     }

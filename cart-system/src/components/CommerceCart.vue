@@ -50,7 +50,8 @@ export default {
     ...mapGetters('cart', {
       cartItems: 'getCartItems',
       cartTotal: 'getCartTotal'
-    })
+    }),
+    
   },
   methods: {
     ...mapActions("cart", {

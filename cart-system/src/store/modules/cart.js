@@ -2,7 +2,6 @@ import {ApiCallMaker} from '../../api/ApiCallMaker';
 // state
 const state = {
   cartItems: [],
-  userId   :  1,
 };
 
 // getters
@@ -33,13 +32,22 @@ const getters = {
 
 // actions
 const actions = {
-  addItemToCart({ state, commit }, product) {
+  async addItemToCart({ state, commit }, product) {
+    
     if (product.stock > 0) {
       const cartItem = state.cartItems.find(
         item => item.itemId === product.id
       );
       if (!cartItem) {
-        commit('addItemToCart', { itemId: product.id });
+        let data = {
+          product_id: product.id, 
+          quantity  :1,
+          };
+        const response = await ApiCallMaker('POST', '/cartitems',data, '','');
+        if (response && response.data.success==true) { 
+          commit('addItemToCart', { itemId: product.id });
+        }
+
       } else {
         commit('incrementQuantityByCartItem', { itemId: product.id });
       }
@@ -53,9 +61,7 @@ const actions = {
   },
   async addInitialItemToCart({ state, commit }) {
 
-   let data = {user_id:state.userId};
-
-    const response = await ApiCallMaker('GET', '/get-user-cart','', '',data);
+    const response = await ApiCallMaker('GET', '/get-user-cart','', '','');
     if (response && response.data.success==true) { 
       commit('addInitialItemToCart',response.data.data.cart_items);
     }
@@ -80,7 +86,7 @@ const actions = {
       let data ={
         product_id: cartItem.itemId, 
         quantity  :cartItem.quantity+1,
-        user_id   :state.userId
+        
         };
       const response = await ApiCallMaker('PUT', '/cartitems/'+cartItem.itemId,data, '','');
       if (response && response.data.success==true) { 
@@ -102,7 +108,7 @@ const actions = {
       let data = {
         product_id: cartItem.itemId, 
         quantity  :cartItem.quantity-1,
-        user_id   :state.userId
+      
         };
       const response = await ApiCallMaker('PUT', '/cartitems/'+cartItem.itemId,data, '','');
       if (response && response.data.success==true) { 
